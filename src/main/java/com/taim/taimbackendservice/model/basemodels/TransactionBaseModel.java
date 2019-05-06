@@ -52,4 +52,8 @@ public class TransactionBaseModel extends BaseModel{
 
     @Column
     private String note;
+
+    @Column(name = "bill_to_address")
+    private String billToAddress;
+
 }

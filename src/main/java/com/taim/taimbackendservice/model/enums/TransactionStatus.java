@@ -1,7 +1,7 @@
 package com.taim.taimbackendservice.model.enums;
 
 public enum TransactionStatus {
-    CREATED_NOT_SUBMITTED("Created"),
+    CREATED_NOT_SUBMITTED("Non Submitted"),
     SUBMITTED("Submitted");
 
     private String value;

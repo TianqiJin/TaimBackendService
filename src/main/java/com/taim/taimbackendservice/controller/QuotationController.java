@@ -74,6 +74,8 @@ public class QuotationController {
             newQuotation.setStatus(TransactionStatus.getStatus(createQuotationDTO.getStatus()));
             newQuotation.setQuotationId(createQuotationDTO.getQuotationId());
             newQuotation.setTransactionType(TransactionType.QUOTATION);
+            newQuotation.setQuotationDate(createQuotationDTO.getQuotationDate());
+            newQuotation.setDueDate(createQuotationDTO.getDueDate());
 
             List<TransactionDetail> transactionDetailList = createQuotationDTO.getCreateQuotationDetailDTOList()
                     .stream()

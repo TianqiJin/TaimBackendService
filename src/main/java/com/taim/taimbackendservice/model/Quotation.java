@@ -14,6 +14,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -31,4 +32,14 @@ public class Quotation extends TransactionBaseModel {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
     private Customer customer;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "quotation_date" ,nullable = false)
+    private Date quotationDate;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "due_date" ,nullable = false)
+    private Date dueDate;
+
+
 }
