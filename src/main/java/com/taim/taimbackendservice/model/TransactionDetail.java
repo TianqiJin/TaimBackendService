@@ -42,10 +42,7 @@ public class TransactionDetail extends BaseModel {
     @Column(name = "unit_price", nullable = false)
     private BigDecimal unitPrice;
 
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "transaction_detail_id_fk")
     @Fetch(FetchMode.SUBSELECT)
     private List<TaxInfo> taxInfos;

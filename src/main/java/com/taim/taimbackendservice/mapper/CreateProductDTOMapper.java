@@ -1,19 +1,13 @@
 package com.taim.taimbackendservice.mapper;
 
-import com.google.common.base.Converter;
 import com.taim.taimbackendservice.model.Product;
 import com.taim.taimbackendservicemodel.CreateProductDTO;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CreateProductDTOMapper extends Converter<Product, CreateProductDTO> {
-    @Override
-    protected CreateProductDTO doForward(Product product) {
-        throw new UnsupportedOperationException();
-    }
+public class CreateProductDTOMapper {
 
-    @Override
-    protected Product doBackward(CreateProductDTO createProductDTO) {
+    public Product map(CreateProductDTO createProductDTO) {
         Product product = new Product();
         product.setSku(createProductDTO.getSku());
         product.setDisplayName(createProductDTO.getDisplayName());

@@ -7,30 +7,26 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.Table;
-import java.math.BigDecimal;
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
-@Table(name = "taxinfo")
+@Table(name = "vendor_todo")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class TaxInfo extends BaseModel {
+public class VendorToDo extends BaseModel {
 
-    @Column(name = "tax_type")
-    private String taxType;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "customer_id")
+    private Vendor vendor;
 
-    @Column(name = "tax_rate")
-    private BigDecimal taxRate;
+    @Column(name = "todo_due_date")
+    private Date todoDueDate;
 
-    @Column(name = "tax_amount")
-    private BigDecimal taxAmount;
+    @Column
+    private String content;
 
-    @Column(name = "tax_amount_by_one")
-    private BigDecimal taxAmountByOne;
 }

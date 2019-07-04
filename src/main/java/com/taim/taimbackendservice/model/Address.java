@@ -13,7 +13,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "addressDTOS")
+@Table(name = "address")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Data

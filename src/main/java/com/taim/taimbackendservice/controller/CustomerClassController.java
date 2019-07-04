@@ -1,7 +1,7 @@
 package com.taim.taimbackendservice.controller;
 
-import com.taim.taimbackendservice.model.CustomerClass;
-import com.taim.taimbackendservice.service.customerclass.ICustomerClassService;
+import com.taim.taimbackendservice.manager.customerclass.CustomerClassManager;
+import com.taim.taimbackendservicemodel.CustomerClassDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +13,11 @@ import java.util.List;
 @RestController
 public class CustomerClassController {
 
-    private final ICustomerClassService customerClassService;
+    private final CustomerClassManager customerClassManager;
 
     @Autowired
-    public CustomerClassController(ICustomerClassService customerClassService) {
-        this.customerClassService = customerClassService;
+    public CustomerClassController(CustomerClassManager customerClassManager) {
+        this.customerClassManager = customerClassManager;
     }
 
     @GetMapping(
@@ -25,8 +25,8 @@ public class CustomerClassController {
             value = "/customerclasses",
             params = "action=getAll"
     )
-    public List<CustomerClass> getCustomerOverview() {
-        return customerClassService.getAll();
+    public List<CustomerClassDTO> getCustomerOverview() {
+        return customerClassManager.getAll();
     }
 
     @GetMapping(
@@ -34,7 +34,7 @@ public class CustomerClassController {
             value = "/customerclasses",
             params = "action=getByFilter"
     )
-    public CustomerClass getCustomerClassByCustomerClassName(@RequestParam("name") String customerClassName) {
-        return customerClassService.getByCustomerClassName(customerClassName);
+    public CustomerClassDTO getCustomerClassByCustomerClassName(@RequestParam("name") String customerClassName) {
+        return customerClassManager.getByCustomerClassName(customerClassName);
     }
 }

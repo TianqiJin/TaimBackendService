@@ -24,6 +24,6 @@ public class AddressDTOMapper extends Converter<Address, AddressDTO> {
 
     @Override
     protected Address doBackward(AddressDTO addressDTO) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 }

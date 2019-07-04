@@ -1,7 +1,7 @@
 package com.taim.taimbackendservice.controller;
 
+import com.taim.taimbackendservice.manager.staff.StaffManager;
 import com.taim.taimbackendservice.model.Staff;
-import com.taim.taimbackendservice.service.staff.IStaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,10 +12,10 @@ import java.util.List;
 @RestController
 public class StaffController {
 
-    private final IStaffService staffService;
+    private final StaffManager staffService;
 
     @Autowired
-    public StaffController(IStaffService staffService) {
+    public StaffController(StaffManager staffService) {
         this.staffService = staffService;
     }
 

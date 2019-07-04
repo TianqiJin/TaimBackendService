@@ -1,9 +1,6 @@
 package com.taim.taimbackendservice.controller;
 
-import com.taim.taimbackendservice.mapper.CreateProductDTOMapper;
-import com.taim.taimbackendservice.mapper.ProductDTOMapper;
-import com.taim.taimbackendservice.model.Product;
-import com.taim.taimbackendservice.service.product.IProductService;
+import com.taim.taimbackendservice.manager.product.ProductManager;
 import com.taim.taimbackendservicemodel.CreateProductDTO;
 import com.taim.taimbackendservicemodel.ProductDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,23 +8,15 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 public class ProductController {
 
-    private final IProductService productService;
-    private final ProductDTOMapper productDTOMapper;
-
-    private final CreateProductDTOMapper createProductDTOMapper;
+    private final ProductManager productManager;
 
     @Autowired
-    public ProductController(IProductService productService,
-                             ProductDTOMapper productDTOMapper,
-                             CreateProductDTOMapper createProductDTOMapper) {
-        this.productService = productService;
-        this.productDTOMapper = productDTOMapper;
-        this.createProductDTOMapper = createProductDTOMapper;
+    public ProductController(ProductManager productManager) {
+        this.productManager = productManager;
     }
 
     @GetMapping(
@@ -36,9 +25,7 @@ public class ProductController {
             params = "action=getAll"
     )
     public List<ProductDTO> getAllProducts() {
-        return this.productService.getAll().stream()
-                .map(this.productDTOMapper::convert)
-                .collect(Collectors.toList());
+        return this.productManager.getAllProducts();
     }
 
     @GetMapping(
@@ -47,7 +34,7 @@ public class ProductController {
             params = "action=getById"
     )
     public ProductDTO getProductById(@RequestParam("id") long id) {
-        return this.productDTOMapper.convert(this.productService.getById(id));
+        return this.productManager.getById(id);
     }
 
     @PostMapping(
@@ -55,9 +42,7 @@ public class ProductController {
             value = "/products",
             params = "action=save"
     )
-    public ProductDTO saveProduct(@RequestBody CreateProductDTO createProductDTO) {
-        Product product = this.createProductDTOMapper.reverse().convert(createProductDTO);
-
-        return this.productDTOMapper.convert(this.productService.save(product));
+    public void saveProduct(@RequestBody CreateProductDTO createProductDTO) {
+        this.productManager.saveProduct(createProductDTO);
     }
 }

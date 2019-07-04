@@ -1,8 +1,8 @@
-package com.taim.taimbackendservice.service;
+package com.taim.taimbackendservice.manager;
 
 import java.util.List;
 
-public interface IBaseService<T> {
+public interface ManagerBase<T> {
     List<T> getAll();
     T getById(long id);
     T save(T t);

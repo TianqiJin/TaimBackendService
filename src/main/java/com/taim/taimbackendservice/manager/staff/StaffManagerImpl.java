@@ -1,4 +1,4 @@
-package com.taim.taimbackendservice.service.staff;
+package com.taim.taimbackendservice.manager.staff;
 
 import com.taim.taimbackendservice.model.Staff;
 import com.taim.taimbackendservice.repository.StaffRepository;
@@ -8,12 +8,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class StaffServiceImpl implements IStaffService {
+public class StaffManagerImpl implements StaffManager {
 
     private final StaffRepository staffRepository;
 
     @Autowired
-    public StaffServiceImpl(StaffRepository staffRepository) {
+    public StaffManagerImpl(StaffRepository staffRepository) {
         this.staffRepository = staffRepository;
     }
 

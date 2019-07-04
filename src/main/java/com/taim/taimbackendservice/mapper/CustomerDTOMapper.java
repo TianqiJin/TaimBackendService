@@ -24,7 +24,7 @@ public class CustomerDTOMapper extends Converter<Customer, CustomerDTO> {
     @Override
     protected CustomerDTO doForward(Customer customer) {
         return CustomerDTO.builder()
-                .addresses(customer.getAddress().stream().map(address -> addressDTOMapper.convert(address))
+                .addresses(customer.getAddress().stream().map(addressDTOMapper::convert)
                         .collect(Collectors.toList()))
                 .customerClass(customerClassDTOMapper.convert(customer.getCustomerClass()))
                 .email(customer.getEmail())

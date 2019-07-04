@@ -3,7 +3,10 @@ package com.taim.taimbackendservice.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.taim.taimbackendservice.model.basemodels.UserBaseModel;
-import lombok.*;
+import com.taim.taimbackendservice.model.enums.UserType;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;

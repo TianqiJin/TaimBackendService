@@ -27,6 +27,7 @@ public class Payment extends BaseModel {
     private BigDecimal paymentAmount;
 
     @Column(name = "payment_type", nullable = false)
+    @Enumerated(EnumType.STRING)
     private PaymentType paymentType;
 
     @Column(name = "is_deposit", nullable = false)

@@ -1,9 +1,7 @@
 package com.taim.taimbackendservice.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.taim.taimbackendservice.model.basemodels.BaseModel;
 import com.taim.taimbackendservice.model.basemodels.TransactionBaseModel;
-import com.taim.taimbackendservice.model.enums.DeliveryStatus;
 import com.taim.taimbackendservice.model.enums.PaymentStatus;
 import com.taim.taimbackendservice.model.enums.TransactionType;
 import lombok.Data;
@@ -19,25 +17,25 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "invoice")
+@Table(name = "purchase_order")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class Invoice extends TransactionBaseModel {
-
-    @Column(nullable=false, name = "invoice_id")
-    private String invoiceId;
-
-    @Column
+public class PurchaseOrder extends TransactionBaseModel {
+    @Column(nullable = false)
     private BigDecimal subtotal;
 
-    @Column
+    @Column(nullable = false)
     private BigDecimal total;
 
     @Column(name = "total_tax", nullable = false)
     private BigDecimal totalTax;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "staff_id_fk")
+    private Staff staff;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id_fk")
@@ -51,35 +49,19 @@ public class Invoice extends TransactionBaseModel {
     @Enumerated(EnumType.STRING)
     private PaymentStatus paymentStatus;
 
-    @Column(name = "delivery_status")
-    @Enumerated(EnumType.STRING)
-    private DeliveryStatus deliveryStatus;
-
     @Column(name = "payment_due_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date paymentDueDate;
 
-    @Column(name = "delivery_due_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date deliveryDueDate;
-
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "invoice_id_fk")
+    @JoinColumn(name = "purchase_order_id_fk")
     @Fetch(FetchMode.SUBSELECT)
     private List<TransactionDetail> transactionDetails;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "invoice_id_fk")
+    @JoinColumn(name = "purchase_order_id_fk")
     @Fetch(FetchMode.SUBSELECT)
     private List<Payment> payments;
-
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    @JoinColumn(name = "invoice_id_fk")
-    @Fetch(FetchMode.SUBSELECT)
-    private List<Delivery> deliveries;
 
     @Column(name = "is_finalized", nullable = false)
     private boolean finalized;

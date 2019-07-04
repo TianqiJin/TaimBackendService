@@ -19,6 +19,6 @@ public class CustomerClassDTOMapper extends Converter<CustomerClass, CustomerCla
 
     @Override
     protected CustomerClass doBackward(CustomerClassDTO customerClassDTO) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 }

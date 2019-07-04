@@ -2,7 +2,6 @@ package com.taim.taimbackendservice.mapper;
 
 import com.google.common.base.Converter;
 import com.taim.taimbackendservice.model.Product;
-
 import com.taim.taimbackendservicemodel.ProductDTO;
 import org.springframework.stereotype.Component;
 

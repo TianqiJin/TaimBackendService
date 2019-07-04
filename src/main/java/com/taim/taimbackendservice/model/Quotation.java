@@ -1,10 +1,7 @@
 package com.taim.taimbackendservice.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.taim.taimbackendservice.model.basemodels.BaseModel;
 import com.taim.taimbackendservice.model.basemodels.TransactionBaseModel;
-import com.taim.taimbackendservice.model.enums.TransactionStatus;
-import com.taim.taimbackendservice.model.enums.TransactionType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -13,7 +10,6 @@ import org.hibernate.annotations.FetchMode;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -34,12 +30,21 @@ public class Quotation extends TransactionBaseModel {
     private Customer customer;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "quotation_date" ,nullable = false)
+    @Column(name = "quotation_date", nullable = false)
     private Date quotationDate;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "due_date" ,nullable = false)
+    @Column(name = "due_date", nullable = false)
     private Date dueDate;
 
+    @Column(name = "bill_to_address")
+    private String billToAddress;
 
+    @Column(name = "bill_from_address")
+    private String billFromAddress;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "quotation_id_fk")
+    @Fetch(FetchMode.SUBSELECT)
+    private List<TransactionDetail> transactionDetails;
 }

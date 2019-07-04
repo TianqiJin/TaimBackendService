@@ -4,8 +4,6 @@ import com.taim.taimbackendservice.model.CustomerClass;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
 public interface CustomerClassRepository extends JpaRepository<CustomerClass, Long> {
     CustomerClass findCustomerClassByCustomerClassName(String customerClassName);
